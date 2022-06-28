@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex flex-column h-100">
     <TheHeader/>
     <TheMain/>
   </div>
