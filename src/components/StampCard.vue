@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- se è un movie -->
-        <div>
+        <div v-if="movie.title">
             <ul class="list-unstyled">
                 <li class="mb-3">
                     <div>{{`Titolo: ${movie.title}`}}</div>
@@ -12,7 +12,7 @@
             </ul>
         </div>
     <!-- se è una serie -->
-        <div>
+        <div v-else-if="movie.original_name">
             <ul class="list-unstyled">
                 <li class="mb-3">
                     <div>{{`Titolo: ${movie.name}`}}</div>
@@ -34,10 +34,6 @@ export default {
     props: {
         movie: Object,
     },
-    mehtods: {
-        
-    },
-    
 }
 </script>
 
