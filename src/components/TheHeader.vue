@@ -17,13 +17,15 @@ export default {
     name: 'TheHeader',
     data() {
         return {
-            searchText: ''
+            searchText: '',
         }
     },
 
     methods: {
         searchMovies() {
-            searchMovies(this.searchText);
+            searchMovies(this.searchText,"movie");
+            searchMovies(this.searchText,"tv");
+            this.searchText = '';
         }
     }
 }
