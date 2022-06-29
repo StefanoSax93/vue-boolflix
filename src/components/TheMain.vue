@@ -1,7 +1,7 @@
 <template>
     <div class="flex-grow-1 bg-secondary overflow-auto">
         <div class="container p-5">
-            <div class="d-flex flex-wrap gap-5 justify-content-center" v-if="moviesList.length !== 0 && seriesList.length !== 0">
+            <div class="d-flex flex-wrap gap-5 justify-content-center" v-if="moviesList.length > 0 || seriesList.length > 0">
                 <div v-for="movie in moviesList" :key="movie.id">
                         <StampCard :product="movie"></StampCard>
                 </div>

@@ -4,7 +4,6 @@ import axios from 'axios';
 export const state = Vue.observable({ 
     moviesList: [],
     seriesList: [],
-    searchText: '',
 });
 
 export function searchMovies(searchText,type) {
