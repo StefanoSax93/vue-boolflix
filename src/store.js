@@ -5,9 +5,13 @@ export const state = Vue.observable({
     moviesList: [],
     seriesList: [],
     clicked: false,
+    loading: false,
 });
 
 export function searchMovies(searchText,type) {
+
+    state.loading = true;
+
     axios
         .get("https://api.themoviedb.org/3/search/" + type, {
             params: {
@@ -24,5 +28,9 @@ export function searchMovies(searchText,type) {
         }
         console.log(state.moviesList);
         state.clicked = true;
+        state.loading = false;
     })
+    .catch(() => {
+        alert("A causa di un errore l'operazione non è andata a buon fine")
+    });
 }
