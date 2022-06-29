@@ -1,6 +1,6 @@
 <template>
     <div class="flex-shrink-0 bg-dark p-3">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex  flex-column flex-md-row justify-content-between align-items-center">
             <img src="../../public/img/logo.png" alt="" class="logo">
             <div class="input-group">
                 <input type="text" v-model="searchText" class="form-control" placeholder="Cerca un film" @keyup.enter="searchMovies">
