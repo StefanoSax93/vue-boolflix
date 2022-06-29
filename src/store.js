@@ -22,6 +22,5 @@ export function searchMovies(searchText,type) {
             state.seriesList = resp.data.results;
         }
         console.log(state.moviesList);
-    });
-    
+    })
 }
