@@ -1,20 +1,20 @@
 <template>
         <div>
             <div class="mb-3 w-100 position-relative poster">
-                    <img :src="`http://image.tmdb.org/t/p/w342/${movie.poster_path}`" alt="" @error="onImgError">
+                    <img :src="`http://image.tmdb.org/t/p/w342/${product.poster_path}`" alt="" @error="onImgError">
                     <div class="card-overlay text-white p-3">
-                        <div v-if="movie.title"><strong>Titolo:</strong> {{movie.title}}</div>
-                        <div v-else-if="movie.original_name"><strong>Titolo:</strong> {{movie.name}}</div>
-                        <div v-if="movie.title"><strong>Titolo originale:</strong> {{movie.original_title}}</div>
-                        <div v-else-if="movie.original_name"><strong>Titolo originale:</strong> {{movie.original_name}}</div>
-                        <div><strong>Lingua:</strong> <lang-flag :iso="movie.original_language" class="rounded"/></div>
+                        <div v-if="product.title"><strong>Titolo:</strong> {{product.title}}</div>
+                        <div v-else-if="product.original_name"><strong>Titolo:</strong> {{product.name}}</div>
+                        <div v-if="product.title"><strong>Titolo originale:</strong> {{product.original_title}}</div>
+                        <div v-else-if="product.original_name"><strong>Titolo originale:</strong> {{product.original_name}}</div>
+                        <div><strong>Lingua:</strong> <lang-flag :iso="product.original_language" class="rounded"/></div>
                         <div>
                             <strong>Voto:</strong> 
                                 <span v-for="num in 5" :key="num" class="ms-2">
-                                    <i class="fa-solid fa-star text-secondary" :class="{'text-warning' : num <= transformVote(movie.vote_average)}"></i>
+                                    <i class="fa-solid fa-star text-secondary" :class="{'text-warning' : num <= transformVote(product.vote_average)}"></i>
                                 </span>
                         </div>
-                        <div v-if="movie.overview" class="overflow-auto h-50"><strong>Overview:</strong> {{movie.overview}}</div>
+                        <div v-if="product.overview" class="overflow-auto h-50"><strong>Overview:</strong> {{product.overview}}</div>
                         <div v-else><strong>Overview:</strong> Non disponibile</div>
                     </div>
             </div>
@@ -28,7 +28,7 @@ export default {
     name: 'StampCard',
     components: { LangFlag },
     props: {
-        movie: Object,
+        product: Object,
     },
     methods: {
         transformVote(vote) {
@@ -53,6 +53,7 @@ export default {
 
     img{
         min-width: 342px;
+        max-width: 342px;
         height: 100%;
     }
 }

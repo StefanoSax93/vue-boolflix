@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export const state = Vue.observable({ 
     moviesList: [],
+    seriesList: [],
 });
 
 export function searchMovies(searchText,type) {
@@ -15,7 +16,11 @@ export function searchMovies(searchText,type) {
         },
     })
     .then((resp) => {
+        if(type === "movie"){
         state.moviesList = resp.data.results;
+        } else if (type === "tv"){
+            state.seriesList = resp.data.results;
+        }
         console.log(state.moviesList);
     });
     

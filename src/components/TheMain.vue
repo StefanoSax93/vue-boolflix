@@ -1,11 +1,14 @@
 <template>
     <div class="flex-grow-1 bg-secondary overflow-auto">
         <div class="container p-5">
-            <div class="d-flex flex-wrap justify-content-center gap-5">
-                <div v-for="movie in moviesList" :key="movie.id" class="d-flex justify-content-start">
-                    <StampCard :movie="movie"></StampCard>
+            <div class="d-flex flex-wrap gap-5 justify-content-center">
+                <div v-for="movie in moviesList" :key="movie.id">
+                        <StampCard :product="movie"></StampCard>
                 </div>
-            </div>
+                <div v-for="serie in seriesList" :key="serie.id">
+                        <StampCard :product="serie"></StampCard>
+                </div>
+            </div>    
         </div>
     </div>
 </template>
@@ -21,7 +24,10 @@ export default {
     computed: {
         moviesList() {
             return state.moviesList;
-        }
+        },
+        seriesList() {
+            return state.seriesList;
+        },
     }
 }
 </script>
