@@ -20,9 +20,10 @@ export default {
             searchText: '',
         }
     },
-
+    
     methods: {
         searchMovies() {
+
             searchMovies(this.searchText,"movie");
             searchMovies(this.searchText,"tv");
             this.searchText = '';

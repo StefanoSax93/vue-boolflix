@@ -4,6 +4,7 @@ import axios from 'axios';
 export const state = Vue.observable({ 
     moviesList: [],
     seriesList: [],
+    clicked: false,
 });
 
 export function searchMovies(searchText,type) {
@@ -22,5 +23,6 @@ export function searchMovies(searchText,type) {
             state.seriesList = resp.data.results;
         }
         console.log(state.moviesList);
+        state.clicked = true;
     })
 }
