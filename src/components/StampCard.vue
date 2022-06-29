@@ -8,8 +8,14 @@
                         <div v-if="movie.title"><strong>Titolo originale:</strong> {{movie.original_title}}</div>
                         <div v-else-if="movie.original_name"><strong>Titolo originale:</strong> {{movie.original_name}}</div>
                         <div><strong>Lingua:</strong> <lang-flag :iso="movie.original_language" class="rounded"/></div>
-                        <div><strong>Voto:</strong> {{transformVote(movie.vote_average)}}</div>
-                        <div><i class="fa-solid fa-star"></i></div>
+                        <div>
+                            <strong>Voto:</strong> 
+                                <span v-for="num in 5" :key="num" class="ms-2">
+                                    <i class="fa-solid fa-star text-secondary" :class="{'text-warning' : num <= transformVote(movie.vote_average)}"></i>
+                                </span>
+                        </div>
+                        <div v-if="movie.overview" class="overflow-auto h-50"><strong>Overview:</strong> {{movie.overview}}</div>
+                        <div v-else><strong>Overview:</strong> Non disponibile</div>
                     </div>
             </div>
         </div>
@@ -30,6 +36,11 @@ export default {
         },
         onImgError(event) {
             event.target.src = 'https://via.placeholder.com/342x512';
+        },
+        num() {
+            for(let num=1; num<=5; num++) {
+                return num;
+            }
         },
         
     }
@@ -59,6 +70,10 @@ export default {
         &:hover {
             opacity: 1;
             border: 3px solid white;
+        }
+
+        div {
+            margin-bottom: 20px;
         }
     }
 </style>

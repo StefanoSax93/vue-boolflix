@@ -1,7 +1,7 @@
 <template>
     <div class="flex-shrink-0 bg-dark p-3">
         <div class="d-flex justify-content-between align-items-center">
-            <div class="display-3 fw-bold text-danger text-uppercase">boolflix</div>
+            <img src="../../public/img/logo.png" alt="" class="logo">
             <div class="input-group">
                 <input type="text" v-model="searchText" class="form-control" placeholder="Cerca un film" @keyup.enter="searchMovies">
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="searchMovies">Cerca</button>
@@ -33,6 +33,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.logo {
+    max-width: 300px;
+}
 .input-group {
     max-width: 400px;
 }
