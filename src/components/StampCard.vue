@@ -16,10 +16,22 @@
                         </div>
                         <div v-if="product.overview"><strong>Overview:</strong> {{product.overview}}</div>
                         <div v-else><strong>Overview:</strong> Non disponibile</div>
-                        <span><strong>Cast:</strong></span>
-                        <span v-for="actor in actorsList" :key="actor.id">
-                            {{actor.name}},
-                        </span>
+                        <div>
+                            <span>
+                                <strong>Cast:</strong>
+                            </span>
+                            <span v-for="actor in actorsList" :key="actor.id">
+                                {{actor.name}},
+                            </span>
+                        </div>
+                        <div>
+                            <span>
+                                <strong>Generi:</strong>
+                            </span>
+                            <span v-for="genre in genresList" :key="genre.id">
+                                {{genre.name}},
+                            </span>
+                        </div>
                     </div>
             </div>
         </div>
@@ -35,6 +47,7 @@ export default {
     data() {
         return {
             actorsList: [],
+            genresList: [],
         }
     },
     props: {
@@ -56,7 +69,16 @@ export default {
                     this.actorsList = resp.data.cast.slice(0,5);
                     
                     console.log(this.actorsList);
-                })
+                });
+            axios
+                .get('https://api.themoviedb.org/3/movie/' + id + '?&api_key=5199994b52f8293fde21362444fcd134&language=it-IT')  
+                .then((resp) => {
+                    this.genresList = [];
+
+                    this.genresList = resp.data.genres;
+
+                    console.log(this.genresList)
+                });  
         }
     }
 }
