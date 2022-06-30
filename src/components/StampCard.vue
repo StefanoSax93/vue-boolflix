@@ -1,6 +1,6 @@
 <template>
         <div>
-            <div class="mb-3 w-100 position-relative poster" @mouseover="getActors(product.id)">
+            <div class="mb-3 w-100 position-relative poster" @mouseover.once="getActors(product.id)">
                     <img :src="`http://image.tmdb.org/t/p/w342/${product.poster_path}`" alt="" @error="onImgError">
                     <div class="card-overlay text-white p-3 overflow-auto">
                         <div v-if="product.title"><strong>Titolo:</strong> {{product.title}}</div>
