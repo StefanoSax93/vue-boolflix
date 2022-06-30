@@ -1,8 +1,8 @@
 <template>
         <div>
-            <div class="mb-3 w-100 position-relative poster">
+            <div class="mb-3 w-100 position-relative poster" @mouseover="getActors(product.id)">
                     <img :src="`http://image.tmdb.org/t/p/w342/${product.poster_path}`" alt="" @error="onImgError">
-                    <div class="card-overlay text-white p-3">
+                    <div class="card-overlay text-white p-3 overflow-auto">
                         <div v-if="product.title"><strong>Titolo:</strong> {{product.title}}</div>
                         <div v-else-if="product.original_name"><strong>Titolo:</strong> {{product.name}}</div>
                         <div v-if="product.title"><strong>Titolo originale:</strong> {{product.original_title}}</div>
@@ -14,19 +14,29 @@
                                     <i class="fa-solid fa-star text-secondary" :class="{'text-warning' : i <= transformVote(product.vote_average)}"></i>
                                 </span>
                         </div>
-                        <div v-if="product.overview" class="overflow-auto h-50"><strong>Overview:</strong> {{product.overview}}</div>
+                        <div v-if="product.overview"><strong>Overview:</strong> {{product.overview}}</div>
                         <div v-else><strong>Overview:</strong> Non disponibile</div>
+                        <span><strong>Cast:</strong></span>
+                        <span v-for="actor in actorsList" :key="actor.id">
+                            {{actor.name}}, 
+                        </span>
                     </div>
             </div>
         </div>
 </template>
 
 <script>
+import axios from 'axios';
 import LangFlag from 'vue-lang-code-flags';
 
 export default {
     name: 'StampCard',
     components: { LangFlag },
+    data() {
+        return {
+            actorsList: [],
+        }
+    },
     props: {
         product: Object,
     },
@@ -36,6 +46,17 @@ export default {
         },
         onImgError(event) {
             event.target.src = "img/imgError.png";
+        },
+        getActors(id) {
+            axios
+                .get('https://api.themoviedb.org/3/movie/' + id + '/credits?&api_key=5199994b52f8293fde21362444fcd134')
+                .then((resp) => {
+                    while(this.actorsList.length < 5) {
+                        this.actorsList.push(...resp.data.cast);
+                    }
+                        
+                    console.log(this.actorsList);
+                })
         }
     }
 }
