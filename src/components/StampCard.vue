@@ -35,7 +35,7 @@ export default {
             return Math.ceil((vote) / 2);
         },
         onImgError(event) {
-            event.target.src = 'https://via.placeholder.com/342x512';
+            event.target.src = "img/imgError.png";
         }
     }
 }
