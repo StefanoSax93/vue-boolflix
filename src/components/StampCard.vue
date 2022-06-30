@@ -51,10 +51,11 @@ export default {
             axios
                 .get('https://api.themoviedb.org/3/movie/' + id + '/credits?&api_key=5199994b52f8293fde21362444fcd134')
                 .then((resp) => {
-                    while(this.actorsList.length < 5) {
-                        this.actorsList.push(...resp.data.cast);
+                    this.actorsList = [];
+
+                    for(let i=0; i<5; i++) {
+                        this.actorsList.push(...resp.data.cast[i]);
                     }
-                        
                     console.log(this.actorsList);
                 })
         }
