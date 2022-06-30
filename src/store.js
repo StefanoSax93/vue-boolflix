@@ -26,8 +26,14 @@ export function searchMovies(searchText,type) {
         } else if (type === "tv"){
             state.seriesList = resp.data.results;
         }
+        
         console.log(state.moviesList);
-        state.clicked = true;
+        console.log(state.seriesList);
+
+        setTimeout(() => {
+            state.clicked = true;
+        }, 1000);
+
         state.loading = false;
     })
     .catch(() => {

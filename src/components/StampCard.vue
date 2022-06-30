@@ -10,8 +10,8 @@
                         <div><strong>Lingua:</strong> <lang-flag :iso="product.original_language" class="rounded"/></div>
                         <div>
                             <strong>Voto:</strong> 
-                                <span v-for="num in 5" :key="num" class="ms-2">
-                                    <i class="fa-solid fa-star text-secondary" :class="{'text-warning' : num <= transformVote(product.vote_average)}"></i>
+                                <span v-for="i in 5" :key="i" class="ms-2">
+                                    <i class="fa-solid fa-star text-secondary" :class="{'text-warning' : i <= transformVote(product.vote_average)}"></i>
                                 </span>
                         </div>
                         <div v-if="product.overview" class="overflow-auto h-50"><strong>Overview:</strong> {{product.overview}}</div>
@@ -36,13 +36,7 @@ export default {
         },
         onImgError(event) {
             event.target.src = 'https://via.placeholder.com/342x512';
-        },
-        num() {
-            for(let num=1; num<=5; num++) {
-                return num;
-            }
-        },
-        
+        }
     }
 }
 </script>

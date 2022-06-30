@@ -23,7 +23,6 @@ export default {
     
     methods: {
         searchMovies() {
-
             searchMovies(this.searchText,"movie");
             searchMovies(this.searchText,"tv");
             this.searchText = '';
