@@ -1,12 +1,43 @@
 <template>
         <div>
-            <div class="mb-3 w-100 position-relative poster" @mouseover.once="getActors(product.id)">
+            <div v-if="product.title" class="mb-3 w-100 position-relative poster" @mouseover.once="getActors('movie',product.id)">
                     <img :src="`http://image.tmdb.org/t/p/w342/${product.poster_path}`" alt="" @error="onImgError">
                     <div class="card-overlay text-white p-3 overflow-auto">
-                        <div v-if="product.title"><strong>Titolo:</strong> {{product.title}}</div>
-                        <div v-else-if="product.original_name"><strong>Titolo:</strong> {{product.name}}</div>
-                        <div v-if="product.title"><strong>Titolo originale:</strong> {{product.original_title}}</div>
-                        <div v-else-if="product.original_name"><strong>Titolo originale:</strong> {{product.original_name}}</div>
+                        <div><strong>Titolo:</strong> {{product.title}}</div>
+                        <div><strong>Titolo originale:</strong> {{product.original_title}}</div>
+                        <div><strong>Lingua:</strong> <lang-flag :iso="product.original_language" class="rounded"/></div>
+                        <div>
+                            <strong>Voto:</strong> 
+                                <span v-for="i in 5" :key="i" class="ms-2">
+                                    <i class="fa-solid fa-star text-secondary" :class="{'text-warning' : i <= transformVote(product.vote_average)}"></i>
+                                </span>
+                        </div>
+                        <div v-if="product.overview"><strong>Overview:</strong> {{product.overview}}</div>
+                        <div v-else><strong>Overview:</strong> Non disponibile</div>
+                        <div>
+                            <span>
+                                <strong>Cast:</strong>
+                            </span>
+                            <span v-for="actor in actorsList" :key="actor.id">
+                                {{actor.name}},
+                            </span>
+                        </div>
+                        <div>
+                            <span>
+                                <strong>Generi:</strong>
+                            </span>
+                            <span v-for="genre in genresList" :key="genre.id">
+                                {{genre.name}},
+                            </span>
+                        </div>
+                    </div>
+            </div>
+            <!-- Serie TV -->
+            <div v-else-if="product.original_name" class="mb-3 w-100 position-relative poster" @mouseover.once="getActors('tv',product.id)">
+                    <img :src="`http://image.tmdb.org/t/p/w342/${product.poster_path}`" alt="" @error="onImgError">
+                    <div class="card-overlay text-white p-3 overflow-auto">
+                        <div><strong>Titolo:</strong> {{product.name}}</div>
+                        <div><strong>Titolo originale:</strong> {{product.original_name}}</div>
                         <div><strong>Lingua:</strong> <lang-flag :iso="product.original_language" class="rounded"/></div>
                         <div>
                             <strong>Voto:</strong> 
@@ -60,9 +91,9 @@ export default {
         onImgError(event) {
             event.target.src = "img/imgError.png";
         },
-        getActors(id) {
+        getActors(type,id) {
             axios
-                .get('https://api.themoviedb.org/3/movie/' + id + '/credits?&api_key=5199994b52f8293fde21362444fcd134')
+                .get('https://api.themoviedb.org/3/' +type+ '/' + id + '/credits?&api_key=5199994b52f8293fde21362444fcd134')
                 .then((resp) => {
                     this.actorsList = [];
 
@@ -71,7 +102,7 @@ export default {
                     console.log(this.actorsList);
                 });
             axios
-                .get('https://api.themoviedb.org/3/movie/' + id + '?&api_key=5199994b52f8293fde21362444fcd134&language=it-IT')  
+                .get('https://api.themoviedb.org/3/' +type+ '/' + id + '?&api_key=5199994b52f8293fde21362444fcd134&language=it-IT')  
                 .then((resp) => {
                     this.genresList = [];
 
