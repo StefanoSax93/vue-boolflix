@@ -18,7 +18,7 @@
                         <div v-else><strong>Overview:</strong> Non disponibile</div>
                         <span><strong>Cast:</strong></span>
                         <span v-for="actor in actorsList" :key="actor.id">
-                            {{actor.name}}, 
+                            {{actor.name}},
                         </span>
                     </div>
             </div>
@@ -53,9 +53,8 @@ export default {
                 .then((resp) => {
                     this.actorsList = [];
 
-                    for(let i=0; i<5; i++) {
-                        this.actorsList.push(...resp.data.cast[i]);
-                    }
+                    this.actorsList = resp.data.cast.slice(0,5);
+                    
                     console.log(this.actorsList);
                 })
         }
