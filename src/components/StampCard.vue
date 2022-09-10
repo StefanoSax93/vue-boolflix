@@ -1,8 +1,8 @@
 <template>
         <div>
             <div v-if="product.title" class="mb-3 w-100 position-relative poster" @mouseover.once="getActors('movie',product.id)">
-                    <img :src="`http://image.tmdb.org/t/p/w342/${product.poster_path}`" alt="" @error="onImgError">
-                    <div class="card-overlay text-white p-3 overflow-auto">
+                    <img :src="`http://image.tmdb.org/t/p/w342/${product.poster_path}`" alt="" class="rounded" @error="onImgError">
+                    <div class="card-overlay text-white p-3 overflow-auto rounded">
                         <div><strong>Titolo:</strong> {{product.title}}</div>
                         <div><strong>Titolo originale:</strong> {{product.original_title}}</div>
                         <div><strong>Lingua:</strong> <lang-flag :iso="product.original_language" class="rounded"/></div>

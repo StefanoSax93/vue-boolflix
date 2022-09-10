@@ -1,6 +1,6 @@
 <template>
     <div class="flex-shrink-0 bg-dark p-3">
-        <div class="d-flex  flex-column flex-md-row justify-content-between align-items-center">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-4">
             <img src="../../public/img/logo.png" alt="" class="logo">
             <div class="input-group">
                 <input type="text" v-model="searchText" class="form-control" placeholder="Cerca un film o una serie TV" @keyup.enter="searchMovies">
@@ -20,14 +20,13 @@ export default {
             searchText: '',
         }
     },
-    
     methods: {
         searchMovies() {
             searchMovies(this.searchText,"movie");
             searchMovies(this.searchText,"tv");
             this.searchText = '';
-        }
-    }
+        },  
+    },
 }
 
 </script>
